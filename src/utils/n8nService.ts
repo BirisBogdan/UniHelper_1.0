@@ -1,4 +1,3 @@
-
 import { supabase } from '@/integrations/supabase/client';
 
 export class N8nService {
@@ -6,7 +5,6 @@ export class N8nService {
   private webhookUrl: string | null = null;
 
   private constructor() {
-    // Încarcă URL-ul webhook din localStorage dacă există
     this.webhookUrl = localStorage.getItem('n8n_webhook_url');
   }
 
@@ -32,21 +30,25 @@ export class N8nService {
     }
 
     try {
-      const { data, error } = await supabase.functions.invoke('n8n-chat', {
-        body: {
-          question: question,
-          n8nWebhookUrl: this.webhookUrl
-        }
+      const response = await fetch(this.webhookUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          question: question
+        })
       });
 
-      if (error) {
-        console.error('Supabase function error:', error);
-        throw new Error(`Eroare la comunicarea cu n8n: ${error.message}`);
+      if (!response.ok) {
+        throw new Error(`n8n webhook responded with status: ${response.status}`);
       }
 
-      return data.response || 'Nu am primit un răspuns valid.';
+      const data = await response.json();
+      return data.output || 'Nu am primit un răspuns valid.';
+
     } catch (error) {
-      console.error('Error calling n8n service:', error);
+      console.error('Error calling n8n webhook:', error);
       throw error;
     }
   }
