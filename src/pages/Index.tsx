@@ -69,7 +69,6 @@ const Index = () => {
   const handleSendMessage = async () => {
     if (!currentMessage.trim()) return;
 
-    // Verifică dacă n8n este configurat
     if (!n8nService.getWebhookUrl()) {
       toast({
         title: "n8n nu este configurat",
@@ -146,7 +145,6 @@ const Index = () => {
 
         setMessages(prev => [...prev, responseMessage]);
       } else {
-        // Fallback la răspunsul local dacă n8n nu este configurat
         const responseMessage: Message = {
           id: (Date.now() + 1).toString(),
           text: faq.answer,
@@ -174,8 +172,8 @@ const Index = () => {
               <MessageCircle className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-gray-800">Asistent AI Universitar</h1>
-              <p className="text-sm text-gray-600">24/7 Support cu n8n</p>
+              <h1 className="text-xl font-bold text-gray-800">UniHelper</h1>
+              <p className="text-sm text-gray-600">24/7 Support</p>
             </div>
             <div className="ml-auto flex items-center gap-3">
               <N8nConfigDialog />
@@ -296,7 +294,7 @@ const Index = () => {
               </Button>
             </div>
             <p className="text-xs text-gray-500 mt-2 text-center">
-              Enter pentru trimitere • Conectat cu n8n pentru răspunsuri avansate
+              Enter pentru trimitere
             </p>
           </div>
         </Card>
