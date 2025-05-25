@@ -26,7 +26,7 @@ export class N8nService {
 
   async sendQuestionToN8n(question: string): Promise<string> {
     if (!this.webhookUrl) {
-      throw new Error('n8n webhook URL nu este setat. Te rog să-l configurezi în setări.');
+      throw new Error('n8n webhook URL is not set. Please configure it in settings.');
     }
 
     try {
@@ -45,7 +45,7 @@ export class N8nService {
       }
 
       const data = await response.json();
-      return data.output || 'Nu am primit un răspuns valid.';
+      return data.output || 'Did not receive a valid response.';
 
     } catch (error) {
       console.error('Error calling n8n webhook:', error);

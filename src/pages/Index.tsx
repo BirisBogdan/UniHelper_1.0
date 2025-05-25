@@ -24,7 +24,7 @@ const Index = () => {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
-      text: "Salut! Sunt asistentul tău AI 24/7 pentru întrebări universitare. Conectat cu n8n pentru răspunsuri avansate despre burse, programe Erasmus, proceduri de aplicare și politici universitare!",
+      text: "Hi! I'm your 24/7 AI assistant for university questions. Connected with n8n for advanced answers about scholarships, Erasmus programs, application procedures, and university policies!",
       isUser: false,
       timestamp: new Date()
     }
@@ -37,23 +37,23 @@ const Index = () => {
 
   const faqs: FAQ[] = [
     {
-      question: "Cum aplic pentru burse?",
-      answer: "Aplicațiile pentru burse necesită de obicei transcripte academice, scrisori de recomandare și o declarație personală. Verifică biroul de ajutor financiar pentru termene și cerințe specifice.",
+      question: "How do I apply for scholarships?",
+      answer: "Scholarship applications typically require academic transcripts, letters of recommendation, and a personal statement. Check with the financial aid office for specific deadlines and requirements.",
       icon: <GraduationCap className="w-5 h-5" />
     },
     {
-      question: "Ce este programul Erasmus?",
-      answer: "Erasmus este un program de schimb studențesc al Uniunii Europene care îți permite să studiezi la universități partenere pentru 3-12 luni, câștigând credite pentru diploma ta.",
+      question: "What is the Erasmus program?",
+      answer: "Erasmus is a European Union student exchange program that allows you to study at partner universities for 3-12 months, earning credits toward your degree.",
       icon: <Globe className="w-5 h-5" />
     },
     {
-      question: "Care sunt termenele pentru aplicații?",
-      answer: "Termenele pentru aplicații variază în funcție de program. În general, aplicațiile pentru semestrul de toamnă se depun în martie-mai, iar cele pentru semestrul de primăvară în octombrie-noiembrie.",
+      question: "What are the application deadlines?",
+      answer: "Application deadlines vary by program. Generally, fall semester applications are due March-May, and spring semester applications are due October-November.",
       icon: <FileText className="w-5 h-5" />
     },
     {
-      question: "Cum îmi verific progresul academic?",
-      answer: "Poți urmări progresul academic prin portalul studențesc, unde vei găsi transcriptul, creditele completate și lista cerințelor pentru diplomă.",
+      question: "How do I check my academic progress?",
+      answer: "You can track your academic progress through the student portal, where you'll find your transcript, completed credits, and degree requirements list.",
       icon: <BookOpen className="w-5 h-5" />
     }
   ];
@@ -71,8 +71,8 @@ const Index = () => {
 
     if (!n8nService.getWebhookUrl()) {
       toast({
-        title: "n8n nu este configurat",
-        description: "Te rog să configurezi webhook-ul n8n din butonul de setări",
+        title: "n8n is not configured",
+        description: "Please configure the n8n webhook from the settings button",
         variant: "destructive",
       });
       return;
@@ -104,7 +104,7 @@ const Index = () => {
       console.error('Error getting n8n response:', error);
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
-        text: `Îmi pare rău, dar întâmpin dificultăți tehnice cu n8n: ${error.message}. Te rog să verifici configurația și să încerci din nou.`,
+        text: `I'm sorry, but I'm experiencing technical difficulties with n8n: ${error.message}. Please check the configuration and try again.`,
         isUser: false,
         timestamp: new Date()
       };
@@ -195,7 +195,7 @@ const Index = () => {
           >
             <div className="flex items-center gap-3">
               <BookOpen className="w-5 h-5 text-blue-600" />
-              <h2 className="font-semibold text-gray-800">Întrebări Frecvente</h2>
+              <h2 className="font-semibold text-gray-800">Frequently Asked Questions</h2>
             </div>
             {isFaqOpen ? (
               <ChevronUp className="w-5 h-5 text-gray-600" />
@@ -266,7 +266,7 @@ const Index = () => {
                       <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
                       <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
                     </div>
-                    <span className="text-xs text-gray-500">n8n procesează...</span>
+                    <span className="text-xs text-gray-500">n8n processing...</span>
                   </div>
                 </div>
               </div>
@@ -281,7 +281,7 @@ const Index = () => {
                 value={currentMessage}
                 onChange={(e) => setCurrentMessage(e.target.value)}
                 onKeyPress={handleKeyPress}
-                placeholder="Întreabă despre burse, Erasmus, aplicații..."
+                placeholder="Ask about scholarships, Erasmus, applications..."
                 className="flex-1 bg-white/80 border-blue-200 focus:border-blue-400 focus:ring-blue-400"
                 disabled={isLoading}
               />
@@ -294,7 +294,7 @@ const Index = () => {
               </Button>
             </div>
             <p className="text-xs text-gray-500 mt-2 text-center">
-              Enter pentru trimitere
+              Press Enter to send
             </p>
           </div>
         </Card>
